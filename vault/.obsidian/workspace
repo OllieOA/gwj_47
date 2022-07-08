@@ -1,0 +1,96 @@
+{
+  "main": {
+    "id": "6f7f963382336f73",
+    "type": "split",
+    "children": [
+      {
+        "id": "8812b75af84ff397",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Project Management/Decisions.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6bf624bd3f1a5c91",
+    "type": "split",
+    "children": [
+      {
+        "id": "b5142521fe32e343",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f1a6d70417700c66",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "91b7b6992308cbe4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "68fe8dcc0a233f91",
+    "type": "split",
+    "children": [
+      {
+        "id": "fdefee0ebdc152d9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "66b14fe54db58616",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Project Management/Decisions.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "8812b75af84ff397",
+  "lastOpenFiles": [
+    "Project Management/Decisions.md",
+    "Project Management/Project Roles.md",
+    "Project Management/Availability.md"
+  ]
+}
