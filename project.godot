@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "IOHelper",
+"language": "GDScript",
+"path": "res://source/helpers/common/io_helper.gd"
+} ]
+_global_script_class_icons={
+"IOHelper": ""
+}
+
+[application]
+
+config/name="godot-template"
+run/main_scene="res://source/scenes/main/main.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Event="*res://source/helpers/autoloads/event.gd"
+Global="*res://source/helpers/autoloads/global.gd"
+__Screenshot="*res://source/helpers/autoloads/screenshot.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray(  )
+
+[gui]
+
+theme/custom="res://assets/themes/main.theme"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
