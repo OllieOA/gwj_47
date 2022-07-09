@@ -33,7 +33,7 @@ var ForceDirection = {
 	Type.DOWN: -1,
 } # This will determine if another piece can follow
 
-var _lane_type: int= Type.EMPTY
+var _lane_type: int = Type.EMPTY
 var connectable := false
 var _effect_direction := 0
 
@@ -43,8 +43,8 @@ func _ready(type : int = 999) -> void:
 	# TODO: not uniform random
 	match type:
 		999:
-			# Default generation
-			pass
+			# Random type generation
+			_choose_random()
 		_:
 			# Specific type generation
 			pass
@@ -54,3 +54,12 @@ func _ready(type : int = 999) -> void:
 func _on_effect_area_body_entered(body:Node) -> void:
 	if body.has_method("force_move") and _effect_direction != 0:
 		body.force_move(_effect_direction)
+
+func _choose_random() -> void:
+	_lane_type = rand_range(0, Type.size()) # pure random BAD, use Gaussian distribution to prefer EMPTY
+	# Or maybe look into wave function collapse?
+	
+	sprite.texture = TextureLookup[_lane_type]
+	connectable = RearConnectable[_lane_type]
+	_effect_direction = ForceDirection[_lane_type]
+	
