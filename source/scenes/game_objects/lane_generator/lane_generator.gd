@@ -4,6 +4,8 @@ const LEFT_CUTOFF := -100  # x coord to queue free
 
 var _first_child_column
 
+var lane_column : PackedScene = preload("res://source/scenes/game_objects/lane_generator/lane_column.tscn")
+
 func _ready() -> void:
 	_initialize_columns()
 	_first_child_column = get_child(0)
@@ -26,9 +28,9 @@ func _initialize_columns() -> void:
 
 func _create_new_column() -> void:
 	# Generate a new column
-	var new_column = LaneColumn.instance()
+	var new_column = lane_column.instance()
 	add_child(new_column)
-	new_column.generate_column(get_child(-1).read_column_connections())
+#	new_column.generate_column(get_child(-1).read_column_connections())
 
 
 func _get_first_child() -> void:

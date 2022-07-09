@@ -43,13 +43,16 @@ var _state = State.COASTING
 
 func _ready() -> void:
 	# Initialise position
-	_num_lanes = len(_lane_to_position)
+	_num_lanes = _lane_to_position.size() # better to use the dictionary-specific method
 	position = _lane_to_position[_current_lane]
 
 	stun_timer.connect("timeout", self, "_handle_stun_timeout")
 
 
 func _process(delta: float) -> void:
+	# Explicitly handle input so that you can hold the button down to move
+	_handle_input()
+	
 	# Set a target (if none set)
 	if _current_lane != _target_lane:
 		_set_target_position(_lane_to_position[_target_lane])
@@ -89,17 +92,14 @@ func _process(delta: float) -> void:
 
 
 func _move_boat(normal_direction: int) -> void:
-	_target_lane = clamp(_target_lane + normal_direction, 1, _num_lanes)
-	Event.emit_signal("character_boat_move_accepted", normal_direction)
-	print("SET _TARGET_LANE TO ", _target_lane)
-
-func _unhandled_input(event: InputEvent) -> void:
-	var _moveable = _current_lane == _target_lane and _state == State.COASTING
-	if event.is_action_pressed("move_up") and _moveable:
-		_move_boat(1)
+	# Instead of clamping, I think we should do check operations, so that the "move accepted" signal
+	# is only called if the move is valid
 	
-	if event.is_action_pressed("move_down") and _moveable:
-		_move_boat(-1)
+	if _target_lane + normal_direction >= 1 and _target_lane + normal_direction <= _num_lanes:
+		_target_lane = clamp(_target_lane + normal_direction, 1, _num_lanes) # Clamp anyway because ¯\_(ツ)_/¯
+		Event.emit_signal("character_boat_move_accepted", normal_direction)
+		print("SET _TARGET_LANE TO ", _target_lane)
+
 
 # SIGNAL CALLBACKS
 func _handle_stun_timeout() -> void:
@@ -115,3 +115,11 @@ func _force_move(normal_direction: int) -> void:
 	_target_lane += normal_direction
 	_set_target_position(_lane_to_position[_target_lane])
 	_state = State.MOVING
+
+func _handle_input() -> void:
+	var _moveable = _current_lane == _target_lane and _state == State.COASTING
+	if Input.is_action_pressed("move_up") and _moveable:
+		_move_boat(1)
+	
+	if Input.is_action_pressed("move_down") and _moveable:
+		_move_boat(-1)

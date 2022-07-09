@@ -13,6 +13,8 @@ var _position_close_enough_x := false
 var _position_close_enough_y := false
 
 # TODO: Refactor this to only affect y values
+# MAYBE WE CAN REFACTOR INTO A "BOAT" CLASS, SO WE DON'T NEED TO COPY STATES, POSITIONS, ETC MULTIPLE
+# TIMES? - DAVE
 var _lane_to_position := {
 	1: Vector2(600, 600),
 	2: Vector2(600, 500),
@@ -49,13 +51,16 @@ func _process(delta: float) -> void:
 		State.MOVING:
 			if not _target_reached:
 				position = lerp(position, _target_position, 0.1)
+				# TWEENS ARE LIFE - DAVE
 			else:
 				# Target reached!
 				_state = State.WAITING
 
 # SIGNAL CALLBACKS
 func _handle_character_boat_move_accepted(normal_direction: int) -> void:
-	# TODO: clamp this
+	# TODO: clamp this 
+	#-> DOESN'T NEED CLAMPING SINCE ONLY CALLED WHEN CHARACTER MOVE IS ACCEPTED.
+	# CLAMPING SHOULD OCCUR THERE - DAVE
 	_target_lane -= normal_direction  # -= as it is opposite
 	_set_target_position(_lane_to_position[_target_lane])
 	_state = State.MOVING
