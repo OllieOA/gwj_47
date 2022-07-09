@@ -38,10 +38,16 @@ var connectable := false
 var _effect_direction := 0
 
 # ENGINE CALLBACKS
-func _ready() -> void:
+func _ready(type : int = 999) -> void:
 	# Randomly choose type, assign sprite texture, set influence direction
 	# TODO: not uniform random
-	pass
+	match type:
+		999:
+			# Default generation
+			pass
+		_:
+			# Specific type generation
+			pass
 
 
 

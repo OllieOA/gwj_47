@@ -1,37 +1,47 @@
 class_name LaneGenerator extends YSort
+"""
+I would have called this a lane _manager_ XD - DAVE
+"""
 
-const LEFT_CUTOFF := -100  # x coord to queue free
+
+export var max_cols : int = 3
 
 var _first_child_column
+var _columns := []
+var _sprite_size : Vector2 = Vector2(256, 128)
+var _num_columns
+var _num_chunks
 
-var lane_column : PackedScene = preload("res://source/scenes/game_objects/lane_generator/lane_column.tscn")
+onready var _lane_column : PackedScene = preload("res://source/scenes/game_objects/lane_generator/lane_column.tscn")
+onready var LEFT_CUTOFF := -ceil(_sprite_size.x * 1.5)  # x coord to queue free
 
 func _ready() -> void:
+	var view_size = get_viewport_rect().size
+	_num_columns = floor(view_size.x / _sprite_size.x)
+	_num_chunks = floor(view_size.y / _sprite_size.y)
 	_initialize_columns()
-	_first_child_column = get_child(0)
 
 
 func _process(delta: float) -> void:
 	# Check for the first column in the children
 
-	if _first_child_column.position.x < LEFT_CUTOFF:
-		_first_child_column.queue_free()
-		call_deferred("_get_first_child")
-
-	_create_new_column()
+	if _columns[0].position.x < LEFT_CUTOFF:
+		_columns[0].queue_free()
+		_columns.pop_front()
+		_create_new_column()
 
 
 func _initialize_columns() -> void:
 	# Create the initial run of columns
+	for column in range(_num_columns):
+		_create_new_column(LaneChunk.Type.EMPTY) # 
 	pass
 
 
-func _create_new_column() -> void:
+func _create_new_column(type : int = 999) -> void:
 	# Generate a new column
-	var new_column = lane_column.instance()
+	var new_column = _lane_column.instance()
+	_columns.push_back(new_column)
 	add_child(new_column)
-#	new_column.generate_column(get_child(-1).read_column_connections())
-
-
-func _get_first_child() -> void:
-	_first_child_column = get_child(0)
+#	new_column.generate_column(get_child(-1).read_column_connections()) # Not sure here?
+	new_column.generate_column(type)
