@@ -16,12 +16,12 @@ var _position_close_enough_y := false
 # MAYBE WE CAN REFACTOR INTO A "BOAT" CLASS, SO WE DON'T NEED TO COPY STATES, POSITIONS, ETC MULTIPLE
 # TIMES? - DAVE
 var _lane_to_position := {
-	1: Vector2(600, 600),
-	2: Vector2(600, 500),
-	3: Vector2(600, 400),
-	4: Vector2(600, 300),
-	5: Vector2(600, 200),
-	6: Vector2(600, 100),
+	1: Vector2(600, Global.sprite_size.y*5),
+	2: Vector2(600, Global.sprite_size.y*4),
+	3: Vector2(600, Global.sprite_size.y*3),
+	4: Vector2(600, Global.sprite_size.y*2),
+	5: Vector2(600, Global.sprite_size.y),
+	6: Vector2(600, 0),
 }
 var _num_lanes := 0
 

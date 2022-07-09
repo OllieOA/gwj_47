@@ -21,12 +21,12 @@ var _position_close_enough_y := false
 
 # TODO: Refactor this to only affect y values
 var _lane_to_position := {  # TODO: Parameterise these to the resolution?
-	1: Vector2(90, 600),
-	2: Vector2(90, 500),
-	3: Vector2(90, 400),
-	4: Vector2(90, 300),
-	5: Vector2(90, 200),
-	6: Vector2(90, 100),
+	1: Vector2(90, Global.sprite_size.y*5),
+	2: Vector2(90, Global.sprite_size.y*4),
+	3: Vector2(90, Global.sprite_size.y*3),
+	4: Vector2(90, Global.sprite_size.y*2),
+	5: Vector2(90, Global.sprite_size.y),
+	6: Vector2(90, 0),
 }
 var _num_lanes := 0
 

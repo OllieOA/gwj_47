@@ -6,6 +6,7 @@ new ones
 var _chunks := []
 
 onready var _chunker := preload("res://source/scenes/game_objects/lane_generator/lane_chunk.tscn")
+onready var num_chunks = floor(Global.view_size.y / Global.sprite_size.y)
 
 # ENGINE CALLBACKS
 func _ready() -> void:
@@ -21,7 +22,8 @@ func read_column_connections() -> Array:
 	return []
 
 func generate_column(type : int = 999) -> void:
-	for i in range(1, 6):
+	for i in range(num_chunks):
 		var new_chunk : LaneChunk = _chunker.instance(type)
 		_chunks.push_back(new_chunk)
+		new_chunk.position.y = ceil(Global.sprite_size.y / 2) + Global.sprite_size.y * i
 		self.call_deferred("add_child", new_chunk)
