@@ -38,6 +38,7 @@ var connectable := false
 var _effect_direction := 0
 
 # ENGINE CALLBACKS
+# OH MY GOD THANK YOU - I DID NOT KNOW YOU COULD PASS VARIABLES TO _READY!!!
 func _ready(type : int = 999) -> void:
 	# Randomly choose type, assign sprite texture, set influence direction
 	# TODO: not uniform random
@@ -50,14 +51,23 @@ func _ready(type : int = 999) -> void:
 			pass
 
 
-
 func _on_effect_area_body_entered(body:Node) -> void:
 	if body.has_method("force_move") and _effect_direction != 0:
 		body.force_move(_effect_direction)
 
+
 func _choose_random() -> void:
-	_lane_type = rand_range(0, Type.size()) # pure random BAD, use Gaussian distribution to prefer EMPTY
-	# Or maybe look into wave function collapse?
+	# TODO: REMOVE THIS TEMPORARY RANDOM AND REPLACE WITH WAVE FUNCTION COLLAPSE
+	# NEEDS PROPER LOGIC BETWEEN EMPTY AND UP/DOWN
+	var _type_choice = randf()
+
+	if _type_choice < 0.9:
+		_lane_type = Type.PASSTHROUGH
+	elif _type_choice >= 0.9 and _type_choice < 0.96:
+		_lane_type = Type.EMPTY
+	else:
+		_lane_type = rand_range(2, 4)  # Random of up/down
+
 	
 	sprite.texture = TextureLookup[_lane_type]
 	connectable = RearConnectable[_lane_type]

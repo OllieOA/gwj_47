@@ -6,6 +6,9 @@ I would have called this a lane _manager_ ¬‿¬ - DAVE
 # DAVE NOTES:
 # I now calculate
 
+# OLLIE NOTES:
+# I also now calculate
+
 export var max_cols : int = 3
 
 var _first_child_column
@@ -24,6 +27,7 @@ func _physics_process(delta: float) -> void:
 	# Check for the first column in the children
 	# ->DAVE<- instead of checking for the first column, we now store the columns and pull the first one
 	# Possible "time save" here by pre-genning the entire level?
+	# ->OLLIE<- Perhaps we should add more columns forward of the player and call_deferred _create_new_column?
 	if _columns[0].position.x < LEFT_CUTOFF:
 		_columns[0].queue_free()
 		_columns.pop_front()
@@ -49,5 +53,4 @@ func _create_new_column(type : int = 999) -> void: # 999 means randomly generate
 	new_column.position.x = Global.sprite_size.x * (_num_columns - 1) # Position the column properly
 	_columns.push_back(new_column)
 	add_child(new_column)
-#	new_column.generate_column(get_child(-1).read_column_connections()) # Not sure here?
 	new_column.generate_column(type)

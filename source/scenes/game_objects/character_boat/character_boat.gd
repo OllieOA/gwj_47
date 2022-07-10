@@ -3,27 +3,25 @@ class_name CharacterBoat extends Boat
 # Export vars
 export (NodePath) onready var stun_timer = get_node(stun_timer) as Timer
 
+const MAX_LANE = 6
+const MIN_LANE = 4
 
 func _ready() -> void:
-	_target_lane = 3
+	_target_lane = 4
+	_current_lane = 4
 	stun_timer.connect("timeout", self, "_handle_stun_timeout")
+	position = Vector2(_x_pos, _lane_to_y_position[_current_lane])
+	_target_position = position
+
+	_max_lane = 6
+	_min_lane = 4
 
 func _process(delta: float) -> void:
 	# Explicitly handle input so that you can hold the button down to move
 	_handle_input()
 	
-	if _state == State.STUNNED:
+	if _state == State.STUNNED and stun_timer.is_stopped():
 		stun_timer.start()
-
-
-func _move_boat(normal_direction: int) -> void:
-	# Instead of clamping, I think we should do check operations, so that the "move accepted" signal
-	# is only called if the move is valid
-	
-	if _target_lane + normal_direction >= 1 and _target_lane + normal_direction <= _num_lanes:
-		_target_lane = clamp(_target_lane + normal_direction, 1, _num_lanes) # Clamp anyway because ¯\_(ツ)_/¯
-		Event.emit_signal("character_boat_move_accepted", normal_direction)
-		print("SET _TARGET_LANE TO ", _target_lane)
 
 
 # SIGNAL CALLBACKS
@@ -34,7 +32,11 @@ func _handle_stun_timeout() -> void:
 func _handle_input() -> void:
 	var _moveable = _current_lane == _target_lane and _state == State.COASTING
 	if Input.is_action_pressed("move_up") and _moveable:
-		_move_boat(1)
+		_attempt_move_boat(1, true)
 	
 	if Input.is_action_pressed("move_down") and _moveable:
-		_move_boat(-1)
+		_attempt_move_boat(-1, true)
+
+
+# CUSTOM METHODS
+
