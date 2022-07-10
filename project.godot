@@ -9,12 +9,17 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "KinematicBody2D",
+"base": "Boat",
 "class": "AllyBoat",
 "language": "GDScript",
 "path": "res://source/scenes/game_objects/ally_boat/ally_boat.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Boat",
+"language": "GDScript",
+"path": "res://source/scenes/game_objects/boat.gd"
+}, {
+"base": "Boat",
 "class": "CharacterBoat",
 "language": "GDScript",
 "path": "res://source/scenes/game_objects/character_boat/character_boat.gd"
@@ -41,6 +46,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AllyBoat": "",
+"Boat": "",
 "CharacterBoat": "",
 "IOHelper": "",
 "LaneChunk": "",
