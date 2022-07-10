@@ -2,5 +2,5 @@
 
 [ext_resource path="res://source/scenes/game_objects/lane_generator/lane_column.gd" type="Script" id=1]
 
-[node name="lane_column" type="Node2D"]
+[node name="lane_column" type="KinematicBody2D"]
 script = ExtResource( 1 )
