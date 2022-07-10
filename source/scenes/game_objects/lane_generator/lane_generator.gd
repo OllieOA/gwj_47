@@ -30,8 +30,9 @@ func _physics_process(delta: float) -> void:
 		_create_new_column()
 	
 	for column in _columns:
+		column = column as KinematicBody2D
 		# Not good, too jittery.
-		column.position.x -= Global.scroll_speed
+		column.move_and_slide(Vector2.LEFT * Global.scroll_speed) 
 
 
 func _initialize_columns() -> void:

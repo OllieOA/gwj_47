@@ -1,7 +1,7 @@
 extends Node2D
 
 var rng = RandomNumberGenerator.new()
-var scroll_speed : float = 10.0
+var scroll_speed : float = 500.0
 
 
 onready var view_size = get_viewport_rect().size

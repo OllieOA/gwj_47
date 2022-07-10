@@ -11,7 +11,9 @@ script = ExtResource( 1 )
 [node name="lane_generator" parent="." instance=ExtResource( 4 )]
 
 [node name="character_boat" parent="." instance=ExtResource( 2 )]
+_x_pos = 90.0
 
 [node name="ally_boats" type="Node2D" parent="."]
 
 [node name="ally_boat" parent="ally_boats" instance=ExtResource( 3 )]
+_x_pos = 600.0
