@@ -4,7 +4,7 @@
 [ext_resource path="res://source/scenes/game_objects/lane_generator/prototype_chunk_empty.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 79, 58 )
+extents = Vector2( 79, 34 )
 
 [node name="lane_chunk" type="Node2D"]
 position = Vector2( 128, 64 )
@@ -12,6 +12,7 @@ script = ExtResource( 1 )
 sprite = NodePath("sprite")
 
 [node name="sprite" type="Sprite" parent="."]
+scale = Vector2( 1, 0.6 )
 texture = ExtResource( 2 )
 
 [node name="effect_area" type="Area2D" parent="."]

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scenes/game_objects/character_boat/character_boat.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Debris",
+"language": "GDScript",
+"path": "res://source/scenes/game_objects/debris/debris.gd"
+}, {
 "base": "Reference",
 "class": "IOHelper",
 "language": "GDScript",
@@ -48,6 +53,7 @@ _global_script_class_icons={
 "AllyBoat": "",
 "Boat": "",
 "CharacterBoat": "",
+"Debris": "",
 "IOHelper": "",
 "LaneChunk": "",
 "LaneColumn": "",
